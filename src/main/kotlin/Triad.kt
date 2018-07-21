@@ -38,9 +38,10 @@ data class Triad(val root: PitchClass,
 
     fun hexatonicPole() = leadingTone().parallel().leadingTone()
 
-    fun isMinor() = root.isMinorThird(third) && third.isMajorThird(fifth)
-
-    fun isMajor() = root.isMajorThird(third) && third.isMinorThird(fifth)
+    private fun isMinor() = root.isMinorThird(third) && third.isMajorThird(fifth)
+    private fun isMajor() = root.isMajorThird(third) && third.isMinorThird(fifth)
+    private fun isDiminished() = root.isMinorThird(third) && third.isMinorThird(fifth)
+    private fun isAugmented() = root.isMajorThird(third) && fifth.isMajorThird(fifth)
 
     private fun onNonMinorOrMajorTriad(): Nothing =
             error("Triad was neither minor nor major")
