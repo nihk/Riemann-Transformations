@@ -135,4 +135,28 @@ class PitchClassTest {
 
         Assert.assertEquals(PitchClass(PitchLetter.B, Accidental.SHARP), result)
     }
+
+    @Test
+    fun descendingMinorThirdTranspose() {
+        val gSharp = PitchClass(PitchLetter.G, Accidental.SHARP)
+        val result = gSharp.transpose(-2, -3)
+
+        Assert.assertEquals(PitchClass(PitchLetter.E, Accidental.SHARP), result)
+    }
+
+    @Test
+    fun descendingSemitoneTransposeDifferentLetter() {
+        val eNatural = PitchClass(PitchLetter.E)
+        val result = eNatural.transpose(-1, -1)
+
+        Assert.assertEquals(PitchClass(PitchLetter.D, Accidental.SHARP), result)
+    }
+
+    @Test
+    fun descendingSemitoneTransposeSameLetter() {
+        val eNatural = PitchClass(PitchLetter.E)
+        val result = eNatural.transpose(0, -1)
+
+        Assert.assertEquals(PitchClass(PitchLetter.E, Accidental.FLAT), result)
+    }
 }

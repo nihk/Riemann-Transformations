@@ -4,8 +4,8 @@ data class Triad(val root: PitchClass,
 
     fun parallel() = Triad(root = root,
             third = when {
-                isMinor() -> third + 1
-                isMajor() -> third - 1
+                isMinor() -> third.transpose(desiredInterval = 1)
+                isMajor() -> third.transpose(desiredInterval = -1)
                 else -> onNonMinorOrMajorTriad()
             },
             fifth = fifth)

@@ -28,22 +28,22 @@ data class PitchClass(
 
     override fun toString() = pitchLetter.toString() + accidental.toString()
 
-    fun transpose(numLetters: Int, desiredInterval: Int): PitchClass {
+    fun transpose(numLetters: Int = 0, desiredInterval: Int): PitchClass {
+        if (numLetters == 0) return this + desiredInterval
+
         var newPitchClass = PitchClass(pitchLetter + numLetters)
-        val recondiledDesiredInterval =
+
+        val reconciledDesiredInterval =
                 if (desiredInterval < 0) desiredInterval + NUM_PITCH_CLASSES else desiredInterval
 
         // Easy way to account for the inconsistencies of pitch intervals
         while (true) {
             val i = interval(newPitchClass)
-            if (i < recondiledDesiredInterval) {
-                newPitchClass += 1
-            } else if (i > recondiledDesiredInterval) {
-                newPitchClass -= 1
-            } else {
-                return newPitchClass
+            when {
+                i < reconciledDesiredInterval -> newPitchClass += 1
+                i > reconciledDesiredInterval -> newPitchClass -= 1
+                else -> return newPitchClass
             }
         }
     }
-
 }
