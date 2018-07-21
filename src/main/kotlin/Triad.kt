@@ -3,33 +3,31 @@ data class Triad(val root: PitchClass,
                  val fifth: PitchClass) {
 
     fun parallel() = Triad(root = root,
-            third = if (isMinor()) third + 1
-                    else if (isMajor()) third - 1
-                    else onNonMinorOrMajorTriad(),
+            third = when {
+                isMinor() -> third + 1
+                isMajor() -> third - 1
+                else -> onNonMinorOrMajorTriad()
+            },
             fifth = fifth)
 
-    fun relative() = if (isMinor()) {
-        Triad(root = third,
+    fun relative() = when {
+        isMinor() -> Triad(root = third,
                 third = fifth,
                 fifth = root.transpose(-1, -2))
-    } else if (isMajor()) {
-        Triad(root = fifth.transpose(1, 2),
+        isMajor() -> Triad(root = fifth.transpose(1, 2),
                 third = root,
                 fifth = third)
-    } else {
-        onNonMinorOrMajorTriad()
+        else -> onNonMinorOrMajorTriad()
     }
 
-    fun leadingTone() = if (isMinor()) {
-        Triad(root = fifth.transpose(1, 1),
+    fun leadingTone() = when {
+        isMinor() -> Triad(root = fifth.transpose(1, 1),
                 third = root,
                 fifth = third)
-    } else if (isMajor()) {
-        Triad(root = third,
+        isMajor() -> Triad(root = third,
                 third = fifth,
                 fifth = root.transpose(-1, -1))
-    } else {
-        onNonMinorOrMajorTriad()
+        else -> onNonMinorOrMajorTriad()
     }
 
     fun nebenverwandt() = relative().leadingTone().parallel()
