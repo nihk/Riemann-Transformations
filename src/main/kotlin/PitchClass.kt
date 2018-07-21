@@ -30,13 +30,15 @@ data class PitchClass(
 
     fun transpose(numLetters: Int, desiredInterval: Int): PitchClass {
         var newPitchClass = PitchClass(pitchLetter + numLetters)
+        val recondiledDesiredInterval =
+                if (desiredInterval < 0) desiredInterval + NUM_PITCH_CLASSES else desiredInterval
 
         // Easy way to account for the inconsistencies of pitch intervals
         while (true) {
             val i = interval(newPitchClass)
-            if (i < desiredInterval) {
+            if (i < recondiledDesiredInterval) {
                 newPitchClass += 1
-            } else if (i > desiredInterval) {
+            } else if (i > recondiledDesiredInterval) {
                 newPitchClass -= 1
             } else {
                 return newPitchClass

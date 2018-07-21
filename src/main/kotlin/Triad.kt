@@ -11,7 +11,7 @@ data class Triad(val root: PitchClass,
     fun relative() = if (isMinor()) {
         Triad(root = third,
                 third = fifth,
-                fifth = root.transpose(6, 10))
+                fifth = root.transpose(-1, -2))
     } else if (isMajor()) {
         Triad(root = fifth.transpose(1, 2),
                 third = root,
@@ -27,7 +27,7 @@ data class Triad(val root: PitchClass,
     } else if (isMajor()) {
         Triad(root = third,
                 third = fifth,
-                fifth = root.transpose(6, 11))
+                fifth = root.transpose(-1, -1))
     } else {
         onNonMinorOrMajorTriad()
     }

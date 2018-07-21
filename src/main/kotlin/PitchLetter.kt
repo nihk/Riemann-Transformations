@@ -13,7 +13,8 @@ enum class PitchLetter {
 
     operator fun plus(i: Int): PitchLetter {
         val values = values()
-        val nextIndex = (ordinal + i) % values.size
+        val add = if (i < 0) i + values.size else i
+        val nextIndex = (ordinal + add) % values.size
         return values[nextIndex]
     }
 }
