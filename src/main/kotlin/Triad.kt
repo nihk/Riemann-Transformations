@@ -38,6 +38,12 @@ data class Triad(val root: PitchClass,
 
     fun hexatonicPole() = leadingTone().parallel().leadingTone()
 
+    fun dominant() = leadingTone().relative()
+
+    fun tritone() = parallel().relative().parallel().relative()
+
+    fun neapolitan() = slide().parallel()
+
     private fun isMinor() = root.isMinorThird(third) && third.isMajorThird(fifth)
     private fun isMajor() = root.isMajorThird(third) && third.isMinorThird(fifth)
     private fun isDiminished() = root.isMinorThird(third) && third.isMinorThird(fifth)

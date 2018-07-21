@@ -11,4 +11,7 @@ fun main(args: Array<String>) {
     println(cMajor.hexatonicPole())  // G# minor
     println(cMajor.slide())          // C# minor
     println(cMajor.nebenverwandt())  // F minor
+    println(cMajor.dominant())       // G major
+    println(cMajor.tritone())        // Gb major
+    println(cMajor.neapolitan())     // C# major
 }
